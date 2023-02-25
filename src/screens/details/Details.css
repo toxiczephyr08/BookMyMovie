@@ -1,0 +1,45 @@
+.back-button {
+    margin-left: 24px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+.flex-container-details {
+    display: flex;
+  }
+
+  .details-page-left {
+    float:left;
+    width: 20%;
+  text-align: center;
+  }
+
+  .details-page-middle {
+    width: 60%;;
+  }
+
+  .details-page-right {
+    width: 20%;
+  }
+
+  .floatRight {
+    float: right;
+  }
+
+  .marginTop16 {
+    margin-top: 16px;
+  }
+  
+  .centerAlign {
+    text-align: center;
+  }
+  
+  .marginBottom16 {
+    margin-bottom: 16px;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }

@@ -1,0 +1,6 @@
+.movie-filter-container {
+    display: flex;
+    float: right;
+    margin: 16px;
+    width:auto;
+}

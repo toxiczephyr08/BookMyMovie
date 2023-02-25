@@ -1,0 +1,15 @@
+.flex-container {  
+    display: flex;
+}
+
+.released-movie-grid {
+    
+    width: 76%;
+    float: left;
+    margin: 16px;
+
+}
+
+.change-pointer {
+    cursor: pointer;
+}
