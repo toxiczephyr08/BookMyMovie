@@ -2,36 +2,46 @@ import React, { useState } from "react";
 import './Header.css';
 import Login from "../../screens/login/Login";
 import logo from "../../assets/logo.svg";
-import { Button } from "@material-ui/core";
+import { Button, Modal } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import LoginModal from "../../screens/loginModal/LoginModal";
 
 const Header = (props) => {
-    const [loggedInStatus, setLoggedInStatus] = useState(false);
-    const checkLoggedIn = (loggedIn) => {
-        setLoggedInStatus(loggedIn);
+    // const[showLoginModal, setShowLoginModal] = useState();
+    // const [open, setOpen] = useState(false);
 
-    };
+    // const bookMyShowHandler = (props) => {
+    //     if(!(props.loggedInStatus))
+    //         setShowLoginModal(true);
+    // }
+
+    // const openModalHandler = () => setOpen(true);
 
     return (
         <div>
             <div className="header">
                 <img className="logo" src={logo} alt="" width="35px" height="35px" />
-                <Login baseUrl={props.baseUrl} onCheckLoggedIn={checkLoggedIn}></Login>
+                <Login baseUrl={props.baseUrl} showBookShowButton = {props.showBookShowButton}></Login>
                 
-                     {props.showBookShowButton&& !loggedInStatus ?
+                     {/* {props.showBookShowButton && !(props.loggedInStatus)?
                         (
                             <div className="bookshow-button">
                                 <Button
                                     variant="contained"
-                                    color="primary">
+                                    color="primary"
+                                    onClick={openModalHandler}>
                                     Book Show
                                 </Button>
-                            </div>
+                            
+                            
+                                <Modal className="modal" open={open}><Login></Login></Modal>
+                                </div>
+                                
                         ) : (
                             ""
                         )}
 
-                    {props.showBookShowButton && loggedInStatus ? (
+                    {props.showBookShowButton && (props.loggedInStatus)? (
                         <div className="bookshow-button">
                             <Link to={"/bookshow/" + props.id}>
                                 <Button variant="contained" color="primary">
@@ -42,7 +52,7 @@ const Header = (props) => {
                     ) : (
                         ""
                     )}
-                
+                 */}
             </div>
         </div>
 

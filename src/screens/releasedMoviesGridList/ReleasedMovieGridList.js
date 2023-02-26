@@ -11,7 +11,7 @@ const ReleasedMovieGridList = (props) => {
     useEffect(() => {
         const getReleasedMovies = async () => {
             const response = await fetch(
-                `${props.baseUrl}movies?RELEASED`
+                `${props.baseUrl}movies?status=RELEASED`
             );
             const data = await response.json();
             setReleasedMovies(data.movies);

@@ -12,9 +12,14 @@
     background-color: #ff7f7f;
     height: 35px;
     float:left;
-
 }
 
+@keyframes app-logo-spin {
+    from {
+      transform: scaleX(-1);
+    }
+  }
+  
 .bookshow-button {
     float: right;
     margin-right: 8px;

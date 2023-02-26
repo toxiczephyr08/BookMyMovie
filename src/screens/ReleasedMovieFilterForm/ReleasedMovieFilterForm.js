@@ -25,6 +25,8 @@ const ReleasedMovieFilterForm = (props) => {
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [selectedArtists, setSelectedArtists] = useState([]);
 
+    //const [checked, setChecked] = useState(false);
+
 
     useEffect(() => {
         const getGenresList = async () => {
@@ -33,7 +35,8 @@ const ReleasedMovieFilterForm = (props) => {
             );
             const data = await response.json();
             setGenresList(data.genres);
-            console.log("printing genres: " + data.genres);
+
+            console.log("genre check: "+ genresList.indexOf('Crime'));
         };
 
         getGenresList();
@@ -48,7 +51,6 @@ const ReleasedMovieFilterForm = (props) => {
             );
             const data = await response.json();
             setArtistsList(data.artists);
-            console.log("printing artists: " + data.artists);
         };
 
         getArtistsList();
@@ -57,6 +59,7 @@ const ReleasedMovieFilterForm = (props) => {
 
     const genreSelectHandler = (event) => {
         setSelectedGenres(event.target.value);
+        //setChecked(event.target.checked);
     };
 
     const artistSelectHandler = (event) => {
@@ -92,13 +95,11 @@ const ReleasedMovieFilterForm = (props) => {
         if (releaseDateEnd !== "") {
             queryString += "&end_date=" + releaseDateEnd;
         }
-        console.log("query : " + queryString);
         const response = await fetch(`${props.baseUrl}movies${encodeURI(queryString)}`);
         const data = await response.json();
         if (response.status === 200) {
             setMovieFilterData(data.movies);
-            console.log(data.movies);
-            props.onMovieFilter(movieFilterData);
+            props.onMovieFilter(data.movies);
         }
     };
 
@@ -106,17 +107,17 @@ const ReleasedMovieFilterForm = (props) => {
         <div float="right">
             <Card className="movie-filter-container">
                 <CardContent>
-                    <FormControl margin="theme.spacing.unit" sx={{ minWidth: 240, maxWidth: 240 }}>
-                        <Typography color="theme.palette.primary.light" component="span" >
+                    <FormControl className={props.classes.formControl}>
+                        <Typography className={props.classes.title} component="span" >
                             FIND MOVIES BY:
-                        </Typography><br />
+                        </Typography>
 
-                        <FormControl >
-                            <TextField className="label"
+                        <FormControl className={props.classes.formControl}>
+                            <InputLabel htmlFor="movieName">Movie Name</InputLabel>
+                            <Input className="label"
                                 id="standard-basic"
-                                label="Movie Name"
                                 variant="standard"
-                                onChange={movieNameHandler} /><br />
+                                onChange={movieNameHandler}></Input>
                         </FormControl>
 
                         <FormControl className={props.classes.formControl}>
@@ -125,14 +126,14 @@ const ReleasedMovieFilterForm = (props) => {
                                 multiple
                                 input={<Input id="select-multiple-checkbox" />}
                                 renderValue={(selected) => selected.join(",")}
-                                value={selectedGenres}
-                                onChange={genreSelectHandler}
+                                value={selectedGenres}       
+                                onChange={genreSelectHandler}                         
                             >
                                 {genresList.map((genre) => (
                                     <MenuItem key={genre.id}
                                         value={genre.genre}>
                                         <Checkbox
-                                            checked={genresList.indexOf(genre.genre) > -1} />
+                                            checked={genresList.indexOf(genre.genre) > -1}/>
                                         <ListItemText
                                             primary={genre.genre} />
                                     </MenuItem>

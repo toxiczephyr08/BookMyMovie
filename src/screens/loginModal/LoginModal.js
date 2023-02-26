@@ -37,18 +37,14 @@ const LoginModal = (props) => {
               Authorization: `Basic ${window.btoa(`${userName}:${password}`)}`,
             },
           });
-          console.log("response.status = "+response.status);
           if (response.status === 200) {
              
             const data = await response.json();
             sessionStorage.setItem("uuid", data.id);
-            sessionStorage.setItem(
-              "access-token",
-              response.headers.get("access-token")
-            );
+            sessionStorage.setItem("access-token", response.headers.get("access-token"));
+            
             setLoggedIn(true); 
-            props.onLoggedIn(loggedIn);
-            console.log("looooggged in "+loggedIn);
+            props.onLoggedIn(true);
             
           }
     }
@@ -78,7 +74,7 @@ const LoginModal = (props) => {
                         <FormHelperText error={Boolean(true)}>{!userNameIsValid ? "required" : ""}</FormHelperText>
                     </FormControl>
                     <FormControl>
-                        <TextField id="standard-basic" label="Password*" variant="standard"
+                        <TextField id="standard-basic" label="Password*" variant="standard" type="password"
                             onChange={inputPasswordHandler}
                             value={password} />
                         <FormHelperText error={Boolean(true)}>{!passwordIsValid ? "required" : ""}</FormHelperText>

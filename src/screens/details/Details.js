@@ -59,6 +59,15 @@ const Details = (props) => {
     const [movie, setMovie] = useState(movieInitial);
     const [starIcons, setStarIcons] = useState(starIconsInitial);
     const [value, setValue] = React.useState(0);
+    const [loggedInStatus, setLoggedInStatus] = useState(false);
+
+    useEffect(() => {
+        const loggedInUser = (sessionStorage.getItem("access-token") == null ? false : true);
+       
+        if (loggedInUser) {
+          setLoggedInStatus(true);
+        }
+      }, []);
 
     const getMovie = async () => {
         try {
@@ -95,7 +104,7 @@ const Details = (props) => {
             <Header 
             id={props.match.params.id}
             baseUrl={props.baseUrl}
-            showBookShowButton></Header>
+            showBookShowButton loggedInStatus></Header>
 
             {/* {props.showBookShowButton && !sessionStorag ? (
           <div className="bookshow-button">
@@ -123,7 +132,7 @@ const Details = (props) => {
           ""
         )} */}
             <div className="back-button">
-                <Typography>
+                <Typography component="span">
                     <Link to="/"> &#60; Back to Home</Link>
                 </Typography>
             </div>
@@ -167,12 +176,13 @@ const Details = (props) => {
                     <div className="trailerContainer">
                         <Typography>
                             <span className="bold">
-                                Trailer:<YouTube
+                                Trailer:</span>
+                        </Typography>
+                                <YouTube
                                     videoId={String(movie.trailer_url).split("?v=")[1]}
                                     opts={videoStyle}
                                     onReady={this._onReady}
-                                /></span>
-                        </Typography>
+                                />                        
                     </div>
 
                 </div>
@@ -185,7 +195,7 @@ const Details = (props) => {
                                 <StarBorderIcon fontSize="inherit" color="white" />
                             }
                             value={value}
-                            onChange={(newValue) => {
+                            onChange={(event, newValue) => {
                                 setValue(newValue);
                             }}
                         />

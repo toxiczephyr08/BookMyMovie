@@ -18,7 +18,7 @@ const UpcomingMoviesGridList = (props) => {
     useEffect(() => {
         const getUpcomingMovies = async () => {
           const response = await fetch(
-            `${baseUrl}movies?PUBLISHED`
+            `${baseUrl}movies?status=PUBLISHED`
           );
           const data = await response.json();
           setUpcomingMovies(data.movies);

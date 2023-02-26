@@ -113,35 +113,35 @@ const RegisterModal = (props) => {
                 <TextField id="standard-basic" label="First Name*" variant="standard"
                     onChange={inputFirstNameHandler}
                     value={firstName}/>
-                    <FormHelperText error="true">{!firstNameIsValid ? "required" : ""}</FormHelperText>
+                    <FormHelperText error={Boolean(true)}>{!firstNameIsValid ? "required" : ""}</FormHelperText>
                     </FormControl>
 
             <FormControl>
                 <TextField id="standard-basic" label="Last Name*" variant="standard"
                     onChange={inputLastNameHandler}
                     value={lastName}/>
-                    <FormHelperText error="true">{!lastNameIsValid ? "required" : ""}</FormHelperText>
+                    <FormHelperText error={Boolean(true)}>{!lastNameIsValid ? "required" : ""}</FormHelperText>
             </FormControl>
 
             <FormControl>
                 <TextField id="standard-basic" label="Email*" variant="standard"
                     onChange={inputEmailNameHandler}
                     value={email} />
-                    <FormHelperText error="true">{!emailIsValid ? "required" : ""}</FormHelperText>
+                    <FormHelperText error={Boolean(true)}>{!emailIsValid ? "required" : ""}</FormHelperText>
             </FormControl>
 
             <FormControl>
-                <TextField id="standard-basic" label="Password*" variant="standard"
+                <TextField id="standard-basic" type="password" label="Password*" variant="standard"
                     onChange={inputPasswordHandler}
                     value={password} />
-                    <FormHelperText error="true">{!passwordIsValid ? "required" : ""}</FormHelperText>                   
+                    <FormHelperText error={Boolean(true)}>{!passwordIsValid ? "required" : ""}</FormHelperText>                   
             </FormControl>
 
             <FormControl>
                 <TextField id="standard-basic" label="Contact No*" variant="standard"
                     onChange={inputContactNoHandler}
                     value={contactNo} />
-                    <FormHelperText error="true">{!contactIsValid ? "required" : ""}</FormHelperText> 
+                    <FormHelperText error={Boolean(true)}>{!contactIsValid ? "required" : ""}</FormHelperText> 
             </FormControl>
             <br />
             <br />

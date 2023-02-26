@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import LoginModal from "../loginModal/LoginModal";
 import RegisterModal from "../registerModal/RegisterModal";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,7 +46,7 @@ const Login = (props) => {
 
   useEffect(() => {
     const loggedInUser = (sessionStorage.getItem("access-token") == null ? false : true);
-   
+
     if (loggedInUser) {
       setLoggedInStatus(true);
     }
@@ -64,11 +65,6 @@ const Login = (props) => {
       closeModalHandler();
       setLoggedInStatus(true);
     }
-    console.log("in setLoggedIn : loggedIn" + loggedIn);
-    console.log("in setLoggedIn : loggedInStatus " + loggedInStatus);
-
-    props.onCheckLoggedIn(loggedIn);
-
   }
 
   const logoutHandler = (event) => {
@@ -77,12 +73,12 @@ const Login = (props) => {
 
     setLoggedIn(false);
     setLoggedInStatus(false);
-    console.log("after logout handler : loggedInStatus " + loggedInStatus);
   };
 
 
   return (
     <div className="login-button">
+
       {!loggedInStatus ? (
 
         <Button className="login-button" variant="contained" onClick={openModalHandler}>Login</Button>
@@ -90,19 +86,20 @@ const Login = (props) => {
         <Button className="login-button" variant="contained" onClick={logoutHandler}>Logout</Button>
       )}
 
-       {/* {props.showBookShowButton && !loggedInStatus ? (
-        <div className="bookshow-button">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={openModalHandler}
-          >
-            Book Show
-          </Button>
-        </div>
-      ) : (
-        ""
-      )}
+{props.showBookShowButton && !loggedInStatus ?
+        (
+          <div className="bookshow-button">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={openModalHandler}>
+              Book Show
+            </Button>
+          </div>
+
+        ) : (
+          ""
+        )}
 
       {props.showBookShowButton && loggedInStatus ? (
         <div className="bookshow-button">
@@ -114,7 +111,8 @@ const Login = (props) => {
         </div>
       ) : (
         ""
-      )}  */}
+      )}
+
 
       <div>
         <Modal className="modal"
