@@ -12,7 +12,6 @@ const LoginModal = (props) => {
     //User Input username and password
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    const [loginDataInput, setLoginDataInput] = useState("");
 
     //validation for username and password
     const [userNameIsValid, setUserNameIsValid] = useState(true)
@@ -40,16 +39,17 @@ const LoginModal = (props) => {
           });
           console.log("response.status = "+response.status);
           if (response.status === 200) {
-            setLoggedIn(true);
+             
             const data = await response.json();
             sessionStorage.setItem("uuid", data.id);
             sessionStorage.setItem(
               "access-token",
               response.headers.get("access-token")
             );
-            
-            console.log("looooggged in "+loggedIn);
+            setLoggedIn(true); 
             props.onLoggedIn(loggedIn);
+            console.log("looooggged in "+loggedIn);
+            
           }
     }
 

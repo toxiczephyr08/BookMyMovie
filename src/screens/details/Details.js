@@ -3,7 +3,6 @@ import {
     GridListTile,
     GridListTileBar,
     Typography,
-    Link,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import YouTube from "react-youtube";
@@ -11,6 +10,7 @@ import Header from "../../common/header/Header";
 import "./Details.css";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Rating from '@mui/material/Rating';
+import { Link } from "react-router-dom";
 
 const starIconsInitial = [
     {
@@ -65,11 +65,8 @@ const Details = (props) => {
 
             const response = await fetch(`${props.baseUrl}movies/${props.match.params.id}`);
             const data = await response.json();
-            console.log("details: " + JSON.stringify(data));
-
-
+            
             setMovie(data);
-            console.log("Genres" + data.genres.join(", "));
         } catch (e) {
             console.error(e.toString);
         }
@@ -95,7 +92,36 @@ const Details = (props) => {
 
     return (
         <div>
-            <Header showBookShowButton></Header>
+            <Header 
+            id={props.match.params.id}
+            baseUrl={props.baseUrl}
+            showBookShowButton></Header>
+
+            {/* {props.showBookShowButton && !sessionStorag ? (
+          <div className="bookshow-button">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={openModalHandler}
+            >
+              Book Show
+            </Button>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {props.showBookShowButton && loggedIn ? (
+          <div className="bookshow-button">
+            <Link to={"/bookshow/" + props.id}>
+              <Button variant="contained" color="primary">
+                Book Show
+              </Button>
+            </Link>
+          </div>
+        ) : (
+          ""
+        )} */}
             <div className="back-button">
                 <Typography>
                     <Link to="/"> &#60; Back to Home</Link>
@@ -103,7 +129,7 @@ const Details = (props) => {
             </div>
             <div className="flex-container-details">
                 <div className="details-page-left">
-                    <img src={movie.poster_url} />
+                    <img src={movie.poster_url} alt=""/>
                 </div>
                 <div className="details-page-middle">
                     <div>
@@ -159,7 +185,7 @@ const Details = (props) => {
                                 <StarBorderIcon fontSize="inherit" color="white" />
                             }
                             value={value}
-                            onChange={(event, newValue) => {
+                            onChange={(newValue) => {
                                 setValue(newValue);
                             }}
                         />

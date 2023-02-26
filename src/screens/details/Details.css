@@ -43,3 +43,7 @@
   .bold {
     font-weight: bold;
   }
+
+  .trailerContainer {
+    margin: 16px 0px 16px 0px;
+  }

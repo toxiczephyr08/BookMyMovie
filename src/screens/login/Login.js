@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import LoginModal from "../loginModal/LoginModal";
 import RegisterModal from "../registerModal/RegisterModal";
-import { Link } from "@material-ui/core";
+import { useEffect } from "react";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,6 +43,14 @@ const Login = (props) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
 
+  useEffect(() => {
+    const loggedInUser = (sessionStorage.getItem("access-token") == null ? false : true);
+   
+    if (loggedInUser) {
+      setLoggedInStatus(true);
+    }
+  }, []);
+
   const tabChangeHandler = (event, newValue) => {
     setValue(newValue);
   }
@@ -56,9 +64,10 @@ const Login = (props) => {
       closeModalHandler();
       setLoggedInStatus(true);
     }
-    console.log("in setLoggedIn");
-    console.log("loggedIn " + loggedIn);
-    console.log("loggedInStatus " + loggedInStatus);
+    console.log("in setLoggedIn : loggedIn" + loggedIn);
+    console.log("in setLoggedIn : loggedInStatus " + loggedInStatus);
+
+    props.onCheckLoggedIn(loggedIn);
 
   }
 
@@ -68,8 +77,7 @@ const Login = (props) => {
 
     setLoggedIn(false);
     setLoggedInStatus(false);
-    console.log("after logout handler");
-    console.log("loggedInStatus " + loggedInStatus);
+    console.log("after logout handler : loggedInStatus " + loggedInStatus);
   };
 
 
@@ -77,12 +85,12 @@ const Login = (props) => {
     <div className="login-button">
       {!loggedInStatus ? (
 
-        <Button variant="contained" onClick={openModalHandler}>Login</Button>
+        <Button className="login-button" variant="contained" onClick={openModalHandler}>Login</Button>
       ) : (
-        <Button variant="contained" onClick={logoutHandler}>Logout</Button>
+        <Button className="login-button" variant="contained" onClick={logoutHandler}>Logout</Button>
       )}
 
-      {/* {props.showBookShowButton && !loggedInStatus ? (
+       {/* {props.showBookShowButton && !loggedInStatus ? (
         <div className="bookshow-button">
           <Button
             variant="contained"
@@ -106,7 +114,7 @@ const Login = (props) => {
         </div>
       ) : (
         ""
-      )} */}
+      )}  */}
 
       <div>
         <Modal className="modal"

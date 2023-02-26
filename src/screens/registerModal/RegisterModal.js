@@ -60,7 +60,7 @@ const RegisterModal = (props) => {
 
         const response = await fetch(`${props.baseUrl}signup`, {
             method: "POST",
-            body: registerInfo,
+            body: registerDataInput,
             headers: {
               "Content-Type": "application/json",
             },

@@ -11,5 +11,11 @@
     animation: app-logo-spin infinite 8s linear;
     background-color: #ff7f7f;
     height: 35px;
+    float:left;
 
 }
+
+.bookshow-button {
+    float: right;
+    margin-right: 8px;
+  }

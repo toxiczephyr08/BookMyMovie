@@ -26,6 +26,10 @@ const ReleasedMovieGridList = (props) => {
         props.history.push("/movie/" + movieId);
       };
 
+      const movieFilterHandler = (movieData) => {      
+            setReleasedMovies(movieData);
+      };
+
     return (
         <div>
             <div>
@@ -45,7 +49,7 @@ const ReleasedMovieGridList = (props) => {
                         </GridListTile>
                     ))}
                 </GridList>
-                <ReleasedMovieFilterForm></ReleasedMovieFilterForm>
+                <ReleasedMovieFilterForm baseUrl={props.baseUrl} onMovieFilter={movieFilterHandler}></ReleasedMovieFilterForm>
             </div>
 
         </div>
