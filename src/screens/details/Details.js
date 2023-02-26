@@ -76,6 +76,7 @@ const Details = (props) => {
             const data = await response.json();
             
             setMovie(data);
+            
         } catch (e) {
             console.error(e.toString);
         }
@@ -103,34 +104,10 @@ const Details = (props) => {
         <div>
             <Header 
             id={props.match.params.id}
+            movieId={movie.uuid}
             baseUrl={props.baseUrl}
             showBookShowButton loggedInStatus></Header>
 
-            {/* {props.showBookShowButton && !sessionStorag ? (
-          <div className="bookshow-button">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={openModalHandler}
-            >
-              Book Show
-            </Button>
-          </div>
-        ) : (
-          ""
-        )}
-
-        {props.showBookShowButton && loggedIn ? (
-          <div className="bookshow-button">
-            <Link to={"/bookshow/" + props.id}>
-              <Button variant="contained" color="primary">
-                Book Show
-              </Button>
-            </Link>
-          </div>
-        ) : (
-          ""
-        )} */}
             <div className="back-button">
                 <Typography component="span">
                     <Link to="/"> &#60; Back to Home</Link>

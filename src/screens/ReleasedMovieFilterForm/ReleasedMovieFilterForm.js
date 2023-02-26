@@ -25,9 +25,6 @@ const ReleasedMovieFilterForm = (props) => {
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [selectedArtists, setSelectedArtists] = useState([]);
 
-    //const [checked, setChecked] = useState(false);
-
-
     useEffect(() => {
         const getGenresList = async () => {
             const response = await fetch(
@@ -35,8 +32,6 @@ const ReleasedMovieFilterForm = (props) => {
             );
             const data = await response.json();
             setGenresList(data.genres);
-
-            console.log("genre check: "+ genresList.indexOf('Crime'));
         };
 
         getGenresList();
@@ -58,7 +53,9 @@ const ReleasedMovieFilterForm = (props) => {
     }, []);
 
     const genreSelectHandler = (event) => {
-        setSelectedGenres(event.target.value);
+        const value = event.target.value;
+        
+        setSelectedGenres(value);
         //setChecked(event.target.checked);
     };
 
@@ -121,19 +118,19 @@ const ReleasedMovieFilterForm = (props) => {
                         </FormControl>
 
                         <FormControl className={props.classes.formControl}>
-                            <InputLabel htmlFor="select-multiple-checkbox">Genres</InputLabel>
+                            <InputLabel id="mutiple-select-label" htmlFor="select-multiple-checkbox">Genres</InputLabel>
                             <Select
+                                labelId="mutiple-select-label"
                                 multiple
-                                input={<Input id="select-multiple-checkbox" />}
-                                renderValue={(selected) => selected.join(",")}
                                 value={selectedGenres}       
-                                onChange={genreSelectHandler}                         
+                                onChange={genreSelectHandler}  
+                                renderValue={(selected) => selected.join(", ")}       
                             >
                                 {genresList.map((genre) => (
                                     <MenuItem key={genre.id}
                                         value={genre.genre}>
                                         <Checkbox
-                                            checked={genresList.indexOf(genre.genre) > -1}/>
+                                            checked={selectedGenres.indexOf(genre.genre) > -1}/>
                                         <ListItemText
                                             primary={genre.genre} />
                                     </MenuItem>
@@ -155,7 +152,7 @@ const ReleasedMovieFilterForm = (props) => {
                                         value={artist.first_name + " " + artist.last_name}>
                                         <Checkbox
                                             checked={
-                                                artistsList.indexOf(
+                                                selectedArtists.indexOf(
                                                     artist.first_name + " " + artist.last_name
                                                 ) > -1
                                             } />

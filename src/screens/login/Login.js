@@ -65,6 +65,7 @@ const Login = (props) => {
       closeModalHandler();
       setLoggedInStatus(true);
     }
+    console.log(props.movieId);
   }
 
   const logoutHandler = (event) => {
@@ -103,7 +104,7 @@ const Login = (props) => {
 
       {props.showBookShowButton && loggedInStatus ? (
         <div className="bookshow-button">
-          <Link to={"/bookshow/" + props.id}>
+          <Link to={"/bookshow/" + props.movieId}>
             <Button variant="contained" color="primary">
               Book Show
             </Button>
