@@ -65,7 +65,6 @@ const Login = (props) => {
       closeModalHandler();
       setLoggedInStatus(true);
     }
-    console.log(props.movieId);
   }
 
   const logoutHandler = (event) => {
